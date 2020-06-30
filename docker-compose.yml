@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  railsweb:
+    logging:
+      options:
+        max-size: 50m
+    build: '.'
+    environment:
+    - NODE_PATH=/usr/bin/
+    ports:
+      - 3000:3000
+    volumes:
+      - '.:/usr/src/app'
+      - '~/.ssh:/home/root/.ssh'
+    entrypoint: ["script/_entrypoint.sh"]
+    command: 'bash -c ./script/_server'
