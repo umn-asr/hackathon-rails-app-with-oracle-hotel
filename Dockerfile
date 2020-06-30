@@ -3,6 +3,20 @@ FROM ruby:2.7.1
 # throw errors if Gemfile has been modified since Gemfile.lock
 # RUN bundle config --global frozen 1
 
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+    && apt-get install alien freetds-dev libaio1 -y
+
+COPY ./rpm/12_2/* /home/oracle/
+
+RUN alien -i /home/oracle/oracle-instantclient12.2-basic-12.2.0.1.0-1.x86_64.rpm \
+    && alien -i /home/oracle/oracle-instantclient12.2-devel-12.2.0.1.0-1.x86_64.rpm \
+    && alien -i /home/oracle/oracle-instantclient12.2-sqlplus-12.2.0.1.0-1.x86_64.rpm
+
+ENV ORACLE_HOME /usr/lib/oracle/12.2/client64
+ENV PATH ${ORACLE_HOME}/bin:$PATH
+ENV LD_LIBRARY_PATH ${ORACLE_HOME}/lib
+
 RUN apt-get update && apt-get install -y \
   curl \
   build-essential \
