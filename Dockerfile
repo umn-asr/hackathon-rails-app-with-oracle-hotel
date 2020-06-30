@@ -1,7 +1,6 @@
 FROM ruby:2.7.1
 
-# throw errors if Gemfile has been modified since Gemfile.lock
-# RUN bundle config --global frozen 1
+WORKDIR /usr/src/app
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -26,11 +25,7 @@ RUN apt-get update && apt-get install -y \
   echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
   apt-get update && apt-get install -y nodejs yarn
 
-# rails
-RUN gem install rails bundler
 COPY Gemfile Gemfile.lock ./
-WORKDIR /usr/src/app
-# RUN bundle config unset frozen
 RUN bundle install
 
 COPY . .
