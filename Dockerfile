@@ -25,3 +25,4 @@ RUN bundle install
 
 COPY . .
 # CMD ["./your-daemon-or-script.rb"]
+# CMD ["rails webpacker:install"]
