@@ -16,5 +16,5 @@ require("channels")
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-require('styles/application.css');
-import "../src/style.scss";
+// require('styles/application.css');
+import("../src/style.scss");
