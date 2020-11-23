@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# script/setup: Tells Docker to setup the project by configuring YAML config files
+# & getting and building Docker images.
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+bundle exec lastpassify config/database.example.yml config/database.yml
+
+echo "==> All done!"
