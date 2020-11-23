@@ -7,6 +7,7 @@ set -e
 
 cd "$(dirname "$0")/.."
 
-bundle exec lastpassify config/database.example.yml config/database.yml
+echo "===> Getting passwords from LastPass if available"
+[ -f ./bin/lastpassify ] && [ -f ./config/database.example.yml ] && ./bin/lastpassify
 
 echo "==> All done!"
