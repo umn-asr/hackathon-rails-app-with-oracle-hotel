@@ -10,4 +10,10 @@ cd "$(dirname "$0")/.."
 echo "===> Getting passwords from LastPass if available"
 [ -f ./bin/lastpassify ] && [ -f ./config/database.example.yml ] && ./bin/lastpassify
 
+echo "===> Building Docker container"
+docker-compose build
+
+echo "===> Spinning up Docker container"
+docker-compose up
+
 echo "==> All done!"
